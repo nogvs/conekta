@@ -1,47 +1,105 @@
-import { View, Text, Image, StyleSheet} from 'react-native'
-import React from 'react'
-import appLogo from './../../assets/images/app-login-logo.png'
+import { View, FlatList, StyleSheet, Image, Text, Animated, useWindowDimensions } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react'
 import Colors from '../../assets/shared/Colors'
 import SignInWithOAuth from '../components/SignInWithOAuth'
+import axios from '../services/axios'
+import Paginator from '../components/Paginator';
 
 export default function Login() {
+
+  const [onboardList, setOnboardList] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const {width} = useWindowDimensions();
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const onBoardRef = useRef(null);
+
+  const renderItem = ({ item }) => (
+    <View style={[styles.itemContainer, {width}]}>
+      <Image
+        style={[styles.image, {width, resizeMode: 'contain'}]}
+        source={{ uri: item.attributes.Imagem.data.attributes.url }}
+      />
+      <View style={{ flex: 0.3}}>
+        <Text style={styles.title}>{item.attributes.Titulo}</Text>
+        <Text style={styles.description}>{item.attributes.Descricao}</Text>
+      </View>
+    </View>
+  );
+
+  const viewableItemsChanges = useRef(({viewableItems}) => {
+    setCurrentIndex(viewableItems[0].index)
+  }).current;
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50}).current;
+
+  useEffect(() => {
+    getOnboards();
+  },[])
+
+  const getOnboards = () => {
+    axios.getOnboards().then(resp => {
+      setOnboardList(resp.data.data)
+    })
+  }
+  
+  if(!onboardList){
+    return null;
+  }
+
   return (
     <View style={styles.container}> 
-      <Image source={appLogo}
-      style={styles.image}/>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>O seu app de alerta de chuva em Cataguases</Text>
-        <Text style={styles.subtitle}>Receba notificações, verifique os pontos de alagamento e entre em contato com as autoridades competentes.</Text>
-      <SignInWithOAuth/>
-      </View>
+    <View style={{flex:3, alignItems: 'center'}}>
+      <FlatList
+        data={onboardList}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        horizontal
+        pagingEnabled
+        bounces={false}
+        onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
+          useNativeDriver: false,          
+        })}
+        scrollEventThrottle={32}
+        onViewableItemsChanged={viewableItemsChanges}
+        viewabilityConfig={viewConfig}
+        ref={onBoardRef}
+      />      
+    <Paginator data={onboardList} scrollX={scrollX}/>
+    <SignInWithOAuth/>
+
+    </View>
+
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container:{
-    alignItems:'center',
-    backgroundColor: Colors.LIGHTGREY
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.WHITE
   },
    image: {
-      width:280,
-      height:550,
-      objectFit:'contain',
-      marginTop: 100,
-      borderRadius:20,
-   },
-   titleContainer: {
-    backgroundColor: Colors.WHITE,
-    padding:25,
-    alignItems:'center',
-    marginTop: -50,
+      flex: 0.8,
+      justifyContent: 'center',
    },
    title: {
-    fontSize:26,
-    fontWeight:'bold'
+    fontSize:38,
+    fontFamily: 'Outfit-Bold',
+    marginBottom: 10,
+    textAlign: 'center'
    },
-   subtitle:{
-      marginTop: 20
+   description:{
+      paddingHorizontal: 24,
+      fontSize:24,
+      fontFamily: 'Outfit-Regular',
+      textAlign: 'center'
    },
+   itemContainer: {
+      flex: 1, 
+      justifyContent: 'center',
+      alignItems: 'center'
+   }
 })
 

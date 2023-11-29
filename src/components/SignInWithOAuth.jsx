@@ -1,6 +1,6 @@
 import React from "react";
 import * as WebBrowser from "expo-web-browser";
-import { StyleSheet, Dimensions, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, Dimensions, TouchableOpacity, Text, Image,View } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from "../hooks/warmUpBrowser";
 import Colors from '../../assets/shared/Colors'
@@ -12,6 +12,8 @@ const SignInWithOAuth = () => {
   useWarmUpBrowser();
  
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  const googleLogo = require('../../assets/images/google-logo.png');
  
   const onPress = React.useCallback(async () => {
     try {
@@ -28,25 +30,26 @@ const SignInWithOAuth = () => {
   }, []);
  
   return (
-    <TouchableOpacity 
-          style={styles.button}
-          onPress={onPress}>
-          <Text style={styles.text}>Login com o Google</Text>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Image source={googleLogo} style={{width: 40, height:40, marginRight: 17}}/>
+          <Text style={styles.text}>Entrar com o Google</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
    button: {
+    flex: 0.03,
+    flexDirection: 'row',
     padding: 16,
-    backgroundColor:Colors.PRIMARY,
-    borderRadius:90,
+    backgroundColor:Colors.DARKGREEN,
+    borderRadius:5,
     alignItems:'center',
-    marginTop: 20,
+    marginBottom: 25,
     width: Dimensions.get('screen').width*0.8,
    },
    text: {
-    fontSize: 17,
+    fontSize: 20,
     color: Colors.WHITE
    }
 })

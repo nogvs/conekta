@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Linking } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import globalApi from '../../services/globalApi';
+import axios from '../../services/axios';
 
 export default function Authoritie() {
   const [authoritieList, setAuthoritieList] = useState();
@@ -37,7 +37,7 @@ export default function Authoritie() {
     },[])
 
     const getAuthorities = () => {
-      globalApi.getAuthorities().then(resp => {
+      axios.getAuthorities().then(resp => {
         setAuthoritieList(resp.data.data)
       })
     }

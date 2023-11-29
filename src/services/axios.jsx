@@ -16,8 +16,26 @@ const getAuthorities = () => AxiosInstance.get("/authorities?populate=*");
 
 const getMarkers = () => AxiosInstance.get("/markers?populate=*");
 
+const getInfos = () => AxiosInstance.get("/infos?populate=*");
+
+const getAlerts = () => AxiosInstance.get("/alerts?populate=*");
+
+const postAlert = (request) => AxiosInstance.post("/alerts", request);
+
+const postMarker = (request) => AxiosInstance.post("/markers", request);
+
+const getNews = () => AxiosInstance.get("/news?populate=*");
+
+const getOnboards = () => AxiosInstance.get("/onboards?populate=*");
+
 export default{
     getSlider,
     getAuthorities,
-    getMarkers
+    getMarkers,
+    postMarker,
+    getInfos,
+    getAlerts,
+    getOnboards,
+    getNews,
+    postAlert
 }

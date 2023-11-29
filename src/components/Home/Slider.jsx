@@ -1,19 +1,8 @@
 import { View, Dimensions, StyleSheet, FlatList,Image ,Text} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import globalApi from '../../services/globalApi';
+import axios from '../../services/axios';
 
-export default function Slider() {
-    const [sliderList, setSliderList] = useState();
-
-    useEffect(() => {
-      getSlider();
-    },[])
-
-    const getSlider = () => {
-      globalApi.getSlider().then(resp => {
-        setSliderList(resp.data.data)
-      })
-    }
+export default function Slider({sliderList}) { 
 
   return (
     <View style={styles.container}>

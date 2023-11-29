@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontFamily: 'Outfit-SemiBold',
     color: Colors.WHITE,
-    marginRight: 35
+    marginRight: 20
   },
   lastUpdated: {
     fontSize: 10,
