@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   mapa: {
     width: Dimensions.get('screen').width * 0.9,
-    height: 280,
+    height: 250,
     marginTop: 10,
   },
   legendaContainer: {

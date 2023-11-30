@@ -20,21 +20,21 @@ export default function TabNavigation() {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: () => <FontAwesome name="home" size={30} color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome name="home" size={30} color={color} />,
         }}
       />
       <Tab.Screen
         name="Alertas"
         component={Alertas}
         options={{
-          tabBarIcon: ({ size }) => <FontAwesome name="warning" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <FontAwesome name="warning" size={size} color={color} />,
         }}
       />
       <Tab.Screen
         name="Notícias"
         component={StackNavigation}
         options={{
-          tabBarIcon: ({ size }) => <Ionicons name="newspaper" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <Ionicons name="newspaper" size={size} color={color} />,
         }}
       />
     </Tab.Navigator>

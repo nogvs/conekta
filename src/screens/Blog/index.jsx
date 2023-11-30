@@ -11,7 +11,7 @@ export function Blog() {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('New', {
+        navigation.navigate('Noticia', {
           Titulo: item.attributes.Titulo,
           Subtitulo: item.attributes.Subtitulo,
           Imagem: item.attributes.Imagem.data.attributes.url,
