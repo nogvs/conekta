@@ -1,11 +1,10 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Home from '../screens/Home'
-import News from '../screens/News'
-import Alerta from '../screens/Alerta'
+import {Home} from '../screens/Home'
+import {Alertas} from '../screens/Alertas'
 import { FontAwesome, Ionicons  } from '@expo/vector-icons';
 import Colors from '../../assets/shared/Colors'
+import StackNavigation from './StackNavigation'
 
 const Tab = createBottomTabNavigator()
 export default function TabNavigation() {
@@ -23,13 +22,13 @@ export default function TabNavigation() {
                     )
                 }}
             />            
-            <Tab.Screen name='Alertas' component={Alerta}
+            <Tab.Screen name='Alertas' component={Alertas}
             options={{
                 tabBarIcon:({size}) => (
                     <FontAwesome name="warning" size={size} color={color} />
                 )
             }}/>
-            <Tab.Screen name='Notícias' component={News}
+            <Tab.Screen name='Notícias' component={StackNavigation}
             options={{
                 tabBarIcon:({size}) => (
                     <Ionicons name="newspaper" size={size} color={color} />

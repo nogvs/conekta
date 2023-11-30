@@ -5,7 +5,8 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "light",    
+    "owner": "livenog",  
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -25,6 +26,24 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },    
+    "extra": {
+      "eas": {
+        "projectId": "4b3354d3-fcb4-46e4-8470-cf4a5e698bf4"
+      }
+    }, 
+    "plugins": [
+      "@notifee/react-native",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          }
+        }
+      ]
+    ]
   }
 }
