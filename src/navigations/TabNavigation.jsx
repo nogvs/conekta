@@ -1,39 +1,42 @@
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {Home} from '../screens/Home'
-import {Alertas} from '../screens/Alertas'
-import { FontAwesome, Ionicons  } from '@expo/vector-icons';
-import Colors from '../../assets/shared/Colors'
-import StackNavigation from './StackNavigation'
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home } from '../screens/Home';
+import { Alertas } from '../screens/Alertas';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import Colors from '../../assets/shared/Colors';
+import StackNavigation from './StackNavigation';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
-
-    const color = Colors.DARKGREEN;
+  const color = Colors.DARKGREEN;
 
   return (
-        <Tab.Navigator screenOptions={{
-            headerShown: false
-        }}>
-            <Tab.Screen name='Home' component={Home}
-                options={{
-                    tabBarIcon:() => (
-                        <FontAwesome name="home" size={30} color={color} />
-                    )
-                }}
-            />            
-            <Tab.Screen name='Alertas' component={Alertas}
-            options={{
-                tabBarIcon:({size}) => (
-                    <FontAwesome name="warning" size={size} color={color} />
-                )
-            }}/>
-            <Tab.Screen name='Notícias' component={StackNavigation}
-            options={{
-                tabBarIcon:({size}) => (
-                    <Ionicons name="newspaper" size={size} color={color} />
-                )
-            }}/>
-        </Tab.Navigator>
-  )
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: () => <FontAwesome name="home" size={30} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Alertas"
+        component={Alertas}
+        options={{
+          tabBarIcon: ({ size }) => <FontAwesome name="warning" size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Notícias"
+        component={StackNavigation}
+        options={{
+          tabBarIcon: ({ size }) => <Ionicons name="newspaper" size={size} color={color} />,
+        }}
+      />
+    </Tab.Navigator>
+  );
 }
