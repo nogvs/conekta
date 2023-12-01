@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Dimensions.get('screen').width * 0.9,
-    height: 100,
+    height: 200,
     borderRadius: 10,
     margin: 2,
   },

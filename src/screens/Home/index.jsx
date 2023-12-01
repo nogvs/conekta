@@ -18,12 +18,12 @@ function wait(timeout) {
 
 function getStatus(value) {
   switch (true) {
-    case value >= 0 && value < 3:
-      return 'NORMAL';
-    case value >= 3 && value < 5.5:
-      return 'ESTADO DE ALERTA';
-    case value >= 5.5 && value < 10:
-      return 'TRANSBORDO';
+    case value >= 350 && value < 450:
+      return 'ATENÇÃO';
+    case value >= 450 && value < 550:
+      return 'ALERTA';
+    case value > 550:
+      return 'INUNDAÇÃO';
     default:
       return 'NORMAL';
   }

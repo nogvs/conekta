@@ -6,9 +6,8 @@ import axios from '../../services/axios';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from '../../../assets/shared/Colors';
 
-export function Map() {
+export function Map({ markerList }) {
   const [location, setLocation] = useState();
-  const [markerList, setMarkerList] = useState();
 
   useEffect(() => {
     (async () => {
@@ -32,16 +31,6 @@ export function Map() {
       );
     })();
   }, []);
-
-  useEffect(() => {
-    getMarkers();
-  }, []);
-
-  const getMarkers = () => {
-    axios.getMarkers().then((resp) => {
-      setMarkerList(resp.data.data);
-    });
-  };
 
   if (!markerList) {
     return null;
